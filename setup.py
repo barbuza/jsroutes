@@ -4,7 +4,7 @@ from setuptools import setup
 
 setup(
     name="jsroutes",
-    version="0.1.1",
+    version="0.1.2",
     packages=["jsroutes", "jsroutes.management",
               "jsroutes.management.commands"],
     install_requires=[
