@@ -16,7 +16,7 @@ var django_url_reverse = (function (urlconf) {
           url = url.replace(/(?:^\^|\$$)/g, '');
           url = url.replace(/\\(?!=\\)/g, '');
           url = url.replace(/\\\\/g, '\\');
-          if (url.test(pattern)) {
+          if (new RegExp(pattern).test(url)) {
             return url;
           } else {
             return null;

@@ -29,7 +29,7 @@ def collect_urls(urls, item, ns=None, prefixes=[]):
             collect_urls(urls, node, ns=ns, prefixes=prefixes)
     elif isinstance(item, RegexURLResolver):
         if ns and item.namespace:
-            newns = "%s:%S" % (ns, item.namespace)
+            newns = "%s:%s" % (ns, item.namespace)
         elif item.namespace:
             newns = item.namespace
         else:
@@ -37,7 +37,7 @@ def collect_urls(urls, item, ns=None, prefixes=[]):
         patterns = prefixes[:]
         patterns.append(item.regex.pattern)
         for node in item.url_patterns:
-            collect_urls(urls, node, ns=ns, prefixes=patterns)
+            collect_urls(urls, node, ns=newns, prefixes=patterns)
     elif isinstance(item, RegexURLPattern):
         if item.name:
             for exc_pattern in getattr(settings, "JSROUTES_EXCLUDE_NAMES", []):
@@ -59,6 +59,6 @@ def collect_urls(urls, item, ns=None, prefixes=[]):
 urls = []
 collect_urls(urls, import_module(settings.ROOT_URLCONF).urlpatterns)
 urls.reverse()
-urls = simplejson.dumps(urls, sort_keys=True, indent=' ')
+urls = simplejson.dumps(urls)
 tmpl = get_template("jsroutes.js")
 javascript = tmpl.render(Context({"urls": urls}))
