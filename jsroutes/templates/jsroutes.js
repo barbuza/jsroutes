@@ -1,7 +1,10 @@
 var django_url_reverse = (function (urlconf) {
   "use strict";
-  function reverse() {
-    var args = Array.from(arguments), name = args.shift(), index, length, pattern, url;
+  function reverse(name, args) {
+    var index, length, pattern, url;
+    if (! args) {
+      args = [];
+    }
     for (index = 0, length = urlconf.length; index < length; index += 1) {
       if (urlconf[index][0] === name) {
         pattern = urlconf[index][1];
