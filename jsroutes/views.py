@@ -2,7 +2,7 @@
 
 from django.http import HttpResponse
 
-from .utils import *
+from .utils import javascript
 
 
 def routes(request):
