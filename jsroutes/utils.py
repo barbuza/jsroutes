@@ -41,12 +41,17 @@ def collect_urls(urls, item, ns=None, prefixes=[]):
     elif isinstance(item, RegexURLPattern):
         if item.name:
             for exc_pattern in getattr(settings, "JSROUTES_EXCLUDE_NAMES", []):
+                if isinstance(exc_pattern, str):
+                    exc_pattern = re.compile(exc_pattern)
+
                 if exc_pattern.match(item.name):
                     break
             else:
                 pattern = merge_patterns(prefixes, item.regex.pattern)
                 for exc_pattern in getattr(settings,
                                            "JSROUTES_EXCLUDE_PATTERNS", []):
+                    if isinstance(exc_pattern, str):
+                        exc_pattern = re.compile(exc_pattern)
                     if exc_pattern.match(pattern):
                         break
                 else:
