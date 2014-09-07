@@ -1,1 +1,3 @@
 *.pyc
+.tox/*
+jsroutes.egg-info/*
