@@ -1,16 +1,17 @@
 # -*- coding: utf-8 -*-
-
 from setuptools import setup
+from jsroutes import VERSION
+
 
 setup(
     name="jsroutes",
-    version="0.1.4",
+    version='.'.join(map(str, VERSION)),
     packages=["jsroutes", "jsroutes.management",
               "jsroutes.management.commands"],
     install_requires=[
         "django",
     ],
-    package_data = {
+    package_data={
         "jsroutes": ["templates/jsroutes.js"],
     },
     author="Viktor Kotseruba",
