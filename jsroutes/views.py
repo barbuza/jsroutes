@@ -6,4 +6,4 @@ from .utils import javascript
 
 
 def routes(request):
-    return HttpResponse(javascript, mimetype="application/x-javascript")
+    return HttpResponse(javascript, content_type="application/x-javascript")
