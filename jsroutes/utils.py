@@ -4,7 +4,12 @@ import re
 
 from django.core.urlresolvers import RegexURLPattern, RegexURLResolver
 from django.conf import settings
-from django.utils.importlib import import_module
+
+try:
+    from django.utils.importlib import import_module
+except ImportError:
+    from importlib import import_module
+    
 try:
     import json
 except ImportError:
