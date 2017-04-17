@@ -15,8 +15,6 @@ try:
 except ImportError:
     from django.utils import simplejson as json
 from django.template.loader import get_template
-from django.template import Context
-
 
 __all__ = ("javascript", )
 
@@ -74,4 +72,4 @@ collect_urls(urls, import_module(settings.ROOT_URLCONF).urlpatterns)
 urls.reverse()
 urls = json.dumps(urls)
 tmpl = get_template("jsroutes.js")
-javascript = tmpl.render(Context({"urls": urls}))
+javascript = tmpl.render({"urls": urls})
