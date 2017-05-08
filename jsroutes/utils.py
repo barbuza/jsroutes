@@ -2,6 +2,7 @@
 
 import re
 
+import django
 from django.core.urlresolvers import RegexURLPattern, RegexURLResolver
 from django.conf import settings
 
@@ -9,12 +10,14 @@ try:
     from django.utils.importlib import import_module
 except ImportError:
     from importlib import import_module
-    
+
 try:
     import json
 except ImportError:
     from django.utils import simplejson as json
 from django.template.loader import get_template
+from django.template import Context
+
 
 __all__ = ("javascript", )
 
@@ -72,4 +75,7 @@ collect_urls(urls, import_module(settings.ROOT_URLCONF).urlpatterns)
 urls.reverse()
 urls = json.dumps(urls)
 tmpl = get_template("jsroutes.js")
-javascript = tmpl.render({"urls": urls})
+context = {"urls": urls}
+if django.VERSION < (1, 11, 0):
+    context = Context(context)
+javascript = tmpl.render(context)
